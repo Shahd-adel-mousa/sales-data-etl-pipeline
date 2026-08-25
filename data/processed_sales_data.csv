@@ -1,0 +1,9 @@
+Order_ID,Product,Category,Quantity,Unit_Price,Region,Total_Sales
+1001,Laptop,Electronics,2,25000,Cairo,50000
+1002,Mouse,Accessories,5,500,Damietta,2500
+1003,Keyboard,Accessories,3,1200,Alexandria,3600
+1004,Monitor,Electronics,2,7000,Cairo,14000
+1005,Headphones,Accessories,4,1500,Mansoura,6000
+1006,Laptop,Electronics,1,25000,Damietta,25000
+1007,Mouse,Accessories,8,500,Cairo,4000
+1008,Monitor,Electronics,3,7000,Alexandria,21000
