@@ -11,7 +11,22 @@ def run_etl():
     # Extract
     df = pd.read_csv(INPUT_FILE)
     print(f"Extracted {len(df)} records.")
+    
+    # Validate required columns
+    required_columns = [
+        "Order_ID",
+        "Product",
+        "Category",
+        "Quantity",
+        "Unit_Price",
+        "Region"
+    ]
 
+    missing_columns = set(required_columns) - set(df.columns)
+
+    if missing_columns:
+        raise ValueError(f"Missing required columns: {missing_columns}")
+    
     # Transform
     df = df.drop_duplicates()
     df = df.dropna()
