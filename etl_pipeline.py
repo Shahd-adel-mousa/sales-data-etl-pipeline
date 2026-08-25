@@ -1,16 +1,28 @@
 import pandas as pd
 
-# Extract
-df = pd.read_csv("data/sales_data.csv")
+INPUT_FILE = "data/sales_data.csv"
+OUTPUT_FILE = "data/processed_sales_data.csv"
 
-# Transform
-df["Total_Sales"] = df["Quantity"] * df["Unit_Price"]
+try:
+    # Extract
+    print("Starting ETL pipeline...")
+    df = pd.read_csv(INPUT_FILE)
+    print(f"Extracted {len(df)} records.")
 
-df = df.drop_duplicates()
-df = df.dropna()
+    # Transform
+    df = df.drop_duplicates()
+    df = df.dropna()
 
-# Load
-df.to_csv("data/processed_sales_data.csv", index=False)
+    df["Total_Sales"] = df["Quantity"] * df["Unit_Price"]
 
-print("ETL pipeline completed successfully!")
-print(df)
+    # Load
+    df.to_csv(OUTPUT_FILE, index=False)
+
+    print(f"Successfully loaded {len(df)} processed records.")
+    print(f"Output saved to: {OUTPUT_FILE}")
+
+except FileNotFoundError:
+    print(f"Error: Input file not found: {INPUT_FILE}")
+
+except Exception as e:
+    print(f"ETL pipeline failed: {e}")
