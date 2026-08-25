@@ -1,11 +1,14 @@
+
 import pandas as pd
 
 INPUT_FILE = "data/sales_data.csv"
 OUTPUT_FILE = "data/processed_sales_data.csv"
 
-try:
-    # Extract
+
+def run_etl():
     print("Starting ETL pipeline...")
+
+    # Extract
     df = pd.read_csv(INPUT_FILE)
     print(f"Extracted {len(df)} records.")
 
@@ -15,14 +18,20 @@ try:
 
     df["Total_Sales"] = df["Quantity"] * df["Unit_Price"]
 
+    print("Data transformation completed.")
+
     # Load
     df.to_csv(OUTPUT_FILE, index=False)
+    print(f"Processed data saved to: {OUTPUT_FILE}")
 
-    print(f"Successfully loaded {len(df)} processed records.")
-    print(f"Output saved to: {OUTPUT_FILE}")
 
-except FileNotFoundError:
-    print(f"Error: Input file not found: {INPUT_FILE}")
+if __name__ == "__main__":
+    try:
+        run_etl()
+        print("ETL pipeline completed successfully!")
 
-except Exception as e:
-    print(f"ETL pipeline failed: {e}")
+    except FileNotFoundError:
+        print(f"Error: Input file not found: {INPUT_FILE}")
+
+    except Exception as e:
+        print(f"ETL pipeline failed: {e}")
